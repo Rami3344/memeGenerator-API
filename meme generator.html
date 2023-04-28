@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="generator()">Generate a meme</button>
+    <img src="#" alt="">
+
+</body>
+<script>
+    const url = 'https://humor-jokes-and-memes.p.rapidapi.com/memes/random?keywords=rocket&number=3&media-type=image&keywords-in-image=false&min-rating=4'
+    const options = {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/octet-stream',
+            'X-RapidAPI-Key': '20906682d5msh3e7dbb8e2ef6f49p1db863jsn1e3a153d4a84',
+            'X-RapidAPI-Host': 'humor-jokes-and-memes.p.rapidapi.com'
+        }
+    };
+
+
+    async function generator() {
+        try {
+            const response = await fetch(url, options);
+            const result = await response.text();
+            const json = JSON.parse(result)
+            const img = document.querySelector("img")
+            img.src = json.url
+            console.log(json)
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+</script>
+
+</html>
